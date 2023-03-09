@@ -1,0 +1,18 @@
+
+
+
+
+
+<form action="" method="POST">
+
+<h1> are you sure you want to delete {{object.title}}</h1>
+    <a href="{% url 'pro' %}">
+       {% csrf_token %}
+            BACK HOME      
+    </a>
+
+
+    <input type="submit" value="confirm" />
+
+</form>
+

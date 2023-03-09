@@ -1,0 +1,48 @@
+
+
+
+{% if page == 'register' %}
+
+<div>
+<h1>register  page </h1>
+<form action="" method="POST" style="z-index: -1;">
+{% csrf_token %}
+{{form.as_p}}
+
+
+<input type="submit", value="registrer in " />
+
+
+</form>
+
+
+
+
+<p>alredady haVE AN ACCOUNT <a href="{% url 'log-project' %}">log in </a></p>
+
+</div>
+{% else %}
+
+<div>
+<form action="" method="POST" style="z-index: -1;">
+{% csrf_token %}
+
+<input type="text" name="username" placeholder="Enter your username" />
+<input type="text" name="password" placeholder="enter password" />
+
+
+
+<input type="submit" value="LOGIN" />
+
+
+<p> dont have an account <a href="{% url 'reg-project' %}">Sign up </a></p>
+{% endif %}
+
+
+
+
+</form>
+</div>
+
+
+
