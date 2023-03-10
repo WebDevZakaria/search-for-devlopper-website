@@ -54,7 +54,7 @@
                   <a title="Personal Website" href="#" target="_blank"><i class="im im-globe"></i></a>
                 </li>
               </ul>
-              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+              <a href="{% url 'send-message' profile.id  %}" class="btn btn--sub btn--lg">Send Message </a>
             </div>
         
 
@@ -80,36 +80,7 @@
               {% endfor %}
              
 
-              <h3 class="devInfo__subtitle">Other Skills</h3>
-              <div class="devInfo__otherSkills">
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>Figma</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>Vuejs</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>REST API</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>GraphQL</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>TypeScript</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>Webpack</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>NextJS</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>Postgres</small>
-                </span>
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>MongoDB</small>
-                </span>
-              </div>
+              
             </div>
           </div>
           <div class="devInfo">
@@ -118,26 +89,16 @@
               {% for project in profile.project_set.all %}
               <div class="column">
                 <div class="card project">
-                  <a href="single-project.html" class="project">
+                  <a href="{% url 'sngle' project.id %}" class="project">
                     <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
                     <div class="card__body">
                       <h3 class="project__title">{{project.title}}</h3>
-                      <p><a class="project__author" href="profile.html">{{project.owner}}</a></p>
+                      <p><a class="project__author" href="{% url 'sngle' project.id %}">{{project.owner}}</a></p>
                       <p class="project--rating">
                         <span style="font-weight: bold;">{{project.vote_ratio}}</span> Postitive
                         Feedback ({{project.vote_total}})
                       </p>
-                      <div class="project__tags">
-                        <span class="tag tag--pill tag--main">
-                          <small>NextJS</small>
-                        </span>
-                        <span class="tag tag--pill tag--main">
-                          <small>GraphQL</small>
-                        </span>
-                        <span class="tag tag--pill tag--main">
-                          <small>TypeScript</small>
-                        </span>
-                      </div>
+             
                     </div>
                   </a>
                 </div>

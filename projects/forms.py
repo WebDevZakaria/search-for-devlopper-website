@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.db.models import fields
 from django.forms import ModelForm, widgets
-from.models import project, formation
+from.models import project, formation, Reviews
 
 
 class projectform(ModelForm):
@@ -15,7 +15,6 @@ class projectform(ModelForm):
 
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
-
         }
 
     def __init__(self, *args, **kwargs):
@@ -42,3 +41,9 @@ class formuser(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'username', 'password1', 'password2', 'email']
+
+
+class formreview(ModelForm):
+    class Meta:
+        model = Reviews
+        fields = ['value', 'body']

@@ -51,11 +51,11 @@
                     <span style="font-weight: bold;">{{p.vote_ratio}}%</span> Postitive
                     {% if p.vote_total == 1 or p.vote_total == 0   %}
 
-                    Feedback ({{p.vote_total}} vote)
-
+                    Feedback ({{p.vote_total}} review)
+                  
                     {% else %}
 
-                    Feedback ({{p.vote_total}} votes)
+                    Feedback ({{p.vote_total}} Reviews)
                     
                     {% endif %}
 
@@ -63,15 +63,7 @@
 
 
                   </p>
-                  <div class="project__tags">
-                    <span class="tag tag--pill tag--main">
-                     <a href="{% url 'update-project' p.id %}"> <small>Edit</small></a>
-                    </span>
-                    <span class="tag tag--pill tag--main">
-                      <a href="{% url 'delete-project' p.id %}"> <small>delete</small></a>
-                    </span>
-                    
-                  </div>
+                  
                 </div>
               </a>
             </div>

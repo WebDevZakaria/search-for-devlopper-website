@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 import uuid
+import django
 
 from django.db.models.base import Model
 
@@ -57,12 +58,18 @@ class Reviews(models.Model):
         ('down', 'Down Vote'),
     )
 
-    projects = models.ForeignKey(project,  on_delete=models.CASCADE)
+    projects = models.ForeignKey(
+        project,  on_delete=models.CASCADE)
+    owners = models.ForeignKey(
+        Profile, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices=VOTE_TYPE)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
+
+    class Meta:
+        unique_together = [['owners', 'projects']]
 
     def __str__(self):
         return self.value
@@ -77,3 +84,4 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+

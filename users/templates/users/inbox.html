@@ -1,0 +1,39 @@
+
+
+{% block content%}
+
+
+
+                      
+                                {%  for message in message %}
+
+                
+                                <a class="dropdown-item d-flex align-items-center" href="">
+                                    
+                                 
+                                    <div class="font-weight-bold">
+
+                                        <div class="text-truncate">{{message.body}}
+
+                                            </div>
+                                    
+                                            <div class="small text-gray-500">{{message.sender.username}}</div>
+                                            <div class="small text-gray-500">{{message.sender.name}}</div>
+                                            <div class="small text-gray-500">{{message.sender.email}}</div>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+
+
+                                    </div>
+                                </a>
+
+
+                                {% endfor %}
+
+                            </div>
+
+                        </li>
+
+{% endblock %}

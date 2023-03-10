@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 from users.models import Profile
-from .models import formation, project
+from .models import formation, project, Reviews
 from django.contrib.auth import login, authenticate, logout
 
 from django.contrib.auth.decorators import login_required
@@ -17,8 +17,9 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.models import User
 
+
 import projects
-from .forms import projectform, formationform, formuser
+from .forms import projectform, formationform, formuser, formreview
 # Create your views here.
 
 
@@ -36,7 +37,6 @@ def pro(request):
         Q(owner__name__icontains=search)
 
     )
-    
 
     page = request.GET.get('page')
     result = 3
@@ -60,8 +60,23 @@ def pro(request):
 def sngle(request, pk):
 
     projectObj = project.objects.get(id=pk)
+    profile = request.user.profile
 
-    return render(request, 'projects/singleproject.html', {'project': projectObj})
+    formreviews = formreview()
+    if request.method == 'POST':
+        formreviews = formreview(request.POST)
+
+        if formreviews.is_valid():
+            formre = formreviews.save(commit=False)
+            formre.owners = profile
+            formre.projects = projectObj
+            formre.save()
+            projectObj.vote_total += projectObj.vote_total + 1
+            projectObj.save()
+
+    reviews = Reviews.objects.filter(projects=projectObj)
+
+    return render(request, 'projects/singleproject.html', {'project': projectObj, 'reviews': reviews, 'form': formreviews})
 
 
 @login_required(login_url="log-project")
@@ -72,6 +87,7 @@ def createproject(request):
    # tag = project.tags.all()
 
     if request.method == 'POST':
+
         form = projectform(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
@@ -168,3 +184,6 @@ def regproject(request):
     context = {"page": page, "form": form}
 
     return render(request, 'projects/login.html', context)
+
+
+# def reviewproject(request):

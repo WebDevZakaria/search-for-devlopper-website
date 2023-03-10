@@ -18,5 +18,9 @@ urlpatterns = [
     path('logout', views.logoutproject, name='lougout'),
     path('regis', views.regproject, name='reg-project'),
 
+    #path('review', views.reviewproject, name='review-project'),
+    
+
+
 
 ]

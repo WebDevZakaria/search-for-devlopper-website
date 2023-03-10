@@ -1,8 +1,8 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from .models import Profile, skills
+from .models import Profile, skills, Message
 from projects.models import project
-from .forms import editForm, skill
+from .forms import editForm, skill, formmessage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
@@ -122,3 +122,34 @@ def deleteskills(request, pk):
     context = {"skillss": form}
 
     return render(request, 'users/delete_skill.html', context)
+
+
+def sendMessage(request, pk):
+
+    profile = Profile.objects.get(id=pk)
+    profiles = request.user.profile
+
+    form = formmessage()
+
+    if request.method == "POST":
+        form = formmessage(request.POST)
+        if form.is_valid():
+            forms = form.save(commit=False)
+            forms.sender = profiles
+            forms.recipient = profile
+            forms.save()
+            return redirect("user-profile", pk)
+
+    context = {"form": form, 'profile': profile}
+
+    return render(request, 'users/sendmessage.html', context)
+
+
+def inbox(request):
+    profile = request.user.profile
+
+    message = Message.objects.filter(recipient=profile)
+
+    context = {'message': message}
+
+    return render(request, 'users/inbox.html', context)

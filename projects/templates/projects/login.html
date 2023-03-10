@@ -131,15 +131,24 @@
     <ul id="ul">
       <li id = 'li'><a href="{% url 'profile' %}" id="a">Profiles</a></li>
       <li id = 'li'><a href="{% url 'pro' %}" id="a">Projects</a></li>
-      <li id = 'li'> <a href="" id="a">Inbox</a></li>
+      
       {% if request.user.is_authenticated  %}
       <li id = 'li'><a href="{% url 'user-account' %}" id="a">Account</a></li>
+
+      <li id = 'li'> <a href="{% url 'inbox' %}" id="a">Inbox</a></li>
+
       <li id = 'li'><a href="{% url 'lougout' %}" id="a">Lougout</a></li>
+
       {% else %}
+
       <li id = 'li'><a href="{% url 'log-project' %}" id="a">Log in</a></li>
+
       {% endif %}
+
     </ul>
+
   </nav>
+
 </div>
 
 
