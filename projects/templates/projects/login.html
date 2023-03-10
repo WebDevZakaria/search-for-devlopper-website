@@ -1,11 +1,14 @@
 
 
+{% block content %}
 
 {% if page == 'register' %}
 
+
+
 <div>
 <h1>register  page </h1>
-<form action="" method="POST" style="z-index: -1;">
+<form action="" method="POST" >
 {% csrf_token %}
 {{form.as_p}}
 
@@ -21,28 +24,150 @@
 <p>alredady haVE AN ACCOUNT <a href="{% url 'log-project' %}">log in </a></p>
 
 </div>
+
 {% else %}
 
-<div>
-<form action="" method="POST" style="z-index: -1;">
-{% csrf_token %}
+<style type="text/css">
 
-<input type="text" name="username" placeholder="Enter your username" />
-<input type="text" name="password" placeholder="enter password" />
+  
+      
+        #text {
+    
+            height: 25px;
+            border-radius: 5px;
+            padding: 4px;
+            border: solid thin #aaa;
+            width: 300px;
+            height: 33px;
+            border-radius: 10px;
+            margin-left: 42px;
+            margin-bottom: 30px;
+            
+        }
+    
+        #button {
+    
+            padding: 10px;
+            width: 100px;
+            color: white;
+            background-color:coral;
+            border: 1px solid #eee;
+            width: 140px;
+            height: 60px;
+            border-radius: 20px;
+            font-size: 20px;
+            margin-left: 120px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #button:hover{
+            color: black;
+            background-color: aquamarine ;
+            cursor: pointer;
+        }
+    
+        #box {
+    
+            background-color: aqua;
+            margin: auto;
+            width: 400px;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            margin-top: 10%;
+            height: 450px;
+    
+    
+        }
+        #body{
+            background-color: #eee;
+        }
+        #nav{
+            background-color: grey;
+            height: 80px;
+            margin-top: 0;
+
+        }
+        #ul{
+            display: flex;
+            margin: 20px;
+            margin-left: 55%;
+        }
+        #li {
+            margin: 20px;
+            list-style: none;
+            font-size: 25px;
+            color: black;
+
+        
+        }
+        #a {
+            color: black;
+            text-decoration: none;
+            border: 1px solid #aaa;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        #a:hover{
+            background-color: aqua;
+            font-size: 20px;
+            color: white;
+        }
+        
+        #ai:hover{
+            color: white;
+
+         }
+    
+    </style>
 
 
 
-<input type="submit" value="LOGIN" />
 
-
-<p> dont have an account <a href="{% url 'reg-project' %}">Sign up </a></p>
-{% endif %}
-
-
-
-
-</form>
+<body id="body">
+    <div style="margin-top: 0px;">
+  <nav id="nav">
+    <ul id="ul">
+      <li id = 'li'><a href="{% url 'profile' %}" id="a">Profiles</a></li>
+      <li id = 'li'><a href="{% url 'pro' %}" id="a">Projects</a></li>
+      <li id = 'li'> <a href="" id="a">Inbox</a></li>
+      {% if request.user.is_authenticated  %}
+      <li id = 'li'><a href="{% url 'user-account' %}" id="a">Account</a></li>
+      <li id = 'li'><a href="{% url 'lougout' %}" id="a">Lougout</a></li>
+      {% else %}
+      <li id = 'li'><a href="{% url 'log-project' %}" id="a">Log in</a></li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>
 
 
 
+
+
+<div id="box">
+
+    <form method="POST" action="" id="form">
+        {% csrf_token %}
+        <div style="font-size: 30px;margin: 10px;color: black;text-align: center;margin-bottom: 70px;font-weight: bold;font-family: Georgia, 'Times New Roman', Times, serif; ">Login</div>
+
+        <input id="text" type="text" name="username"><br><br>
+        <input id="text" type="password" name="password"><br><br>
+
+        <input id="button" type="submit" value="Login"><br><br>
+
+        <a href="{% url 'reg-project' %}"  style="margin-left: 33%;color: blue; font-size: 20px;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;font-weight: 500;" id="ai">click to register</a><br><br>
+        
+    </form>
+</div>
+
+</body>
+
+
+
+
+
+  {% endif %}
+  
+{% endblock %}
